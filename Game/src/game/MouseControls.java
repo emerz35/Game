@@ -10,10 +10,13 @@ public class MouseControls extends MouseAdapter{
 	public MouseControls(Handler handler, Game game){
 		this.handler = handler;
 	}
-	
+	@Override
 	public void mouseMoved(MouseEvent e){
 		mx = e.getX();
 		my = e.getY();
 	}
-	
+        /*
+        USE OBSERVER PATTERN
+        
+        */
 }

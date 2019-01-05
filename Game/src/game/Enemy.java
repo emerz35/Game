@@ -9,6 +9,8 @@ public class Enemy extends GameObject{
 	private int height = 18;
 	public int noticeRadius = 200;
 	private int health = 100;
+        private float tempGrad;
+        private float playerGrad;
 	
 	
 	public boolean noticed = false;
@@ -38,13 +40,35 @@ public class Enemy extends GameObject{
 		float diffY = y - player.getY() - 8;
 		float distance =  (float) Math.sqrt( (x - player.getX()) * (x - player.getX()) + (y - player.getY()) * (y - player.getY()));
 		
-		if(distance < noticeRadius) noticed = true;
+		for(int i = 0; i < handler.collision.size(); i++){
+                    Collision tempCollision = handler.collision.get(i);
+                    tempGrad = (tempCollision.getY() - y) / (tempCollision.getX() - x);
+                    playerGrad = (player.getY() - y) / (player.getX() - x);
+                    if(tempGrad > playerGrad) noticed = true;
+                    
+                    tempGrad = (tempCollision.getY() + tempCollision.height - y) / (tempCollision.getX() - x);
+                    playerGrad = (player.getY() - y) / (player.getX() - x);
+                    if(tempGrad < playerGrad) noticed = true;
+                    
+                    tempGrad = (tempCollision.getY() - y) / (tempCollision.getX() + tempCollision.width - x);
+                    playerGrad = (player.getY() - y) / (player.getX() - x);
+                    if(tempGrad > playerGrad) noticed = true;
+                    
+                    tempGrad = (tempCollision.getY() + tempCollision.height - y) / (tempCollision.getX() + tempCollision.width - x);
+                    playerGrad = (player.getY() - y) / (player.getX() - x);
+                    if(tempGrad < playerGrad) noticed = true;
+                    
+                }
+                //if(distance < noticeRadius) noticed = true;
 		//handler.addObject(new Detect(x,y,ID.Detect,handler,this));
 		
 		if(noticed){
 			velX = ((-1 / distance) * diffX) * 2;
 			velY = ((-1 / distance) * diffY) * 2;
 		}
+                else{
+                    velX = velY = 0;
+                }
 			
 		if(y <= 0 || y >= Game.HEIGHT - 32) velY = -velY;
 		if(x <= 0 || x >= Game.WIDTH - 16) velX = -velX;

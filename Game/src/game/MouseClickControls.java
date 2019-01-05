@@ -11,14 +11,14 @@ public class MouseClickControls extends MouseAdapter{
 	GameObject circle;
 	
 	public MouseClickControls(Handler handler, Game game){
-	
 		this.handler = handler;
 		this.game = game;
 		}
+        @Override
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX() - 18;
 		int my = e.getY() - 20;
-		if(e.getButton() == e.BUTTON1){
+		if(e.getButton() == MouseEvent.BUTTON1){
 			for(int i = 0; i < handler.object.size(); i ++){
 				if(handler.object.get(i).getId() == ID.Orb){ 
 					orb = handler.object.get(i);

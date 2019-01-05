@@ -51,6 +51,7 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 	
+        @Override
 	public void run() {
 		this.requestFocus();
 		long lastTime = System.nanoTime();

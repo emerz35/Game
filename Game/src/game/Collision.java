@@ -22,8 +22,18 @@ public class Collision{
 		g.setColor(Color.red);
 		g.fillRect((int)x,(int)y,width,height);
 	}
-
-	
+        public float getX(){
+            return x;
+        }
+        public void setX(float x){
+            this.x = x;
+        }
+        public float getY(){
+            return y;
+        }
+	public void setY(float y){
+            this.y = y;
+        }
 	public Rectangle getBounds() {
 		
 		return new Rectangle((int)x,(int)y,width,height);

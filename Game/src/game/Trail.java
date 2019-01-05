@@ -28,7 +28,7 @@ public class Trail extends GameObject{
 		this.shape = shape;
 	}
 
-	
+	@Override
 	public void tick() {
 		if(alpha > life){
 			alpha -= (life - 0.0001f);
@@ -36,7 +36,7 @@ public class Trail extends GameObject{
 		else handler.removeObject(this);
 	}
 
-	
+	@Override
 	public void render(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setComposite(makeTransparent(alpha));
@@ -55,7 +55,7 @@ public class Trail extends GameObject{
 		return AlphaComposite.getInstance(type, Alpha);
 	}
 
-	
+	@Override
 	public Rectangle getBounds() {
 		return null;
 	}

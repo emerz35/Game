@@ -8,7 +8,7 @@ import java.util.Random;
 public class MagicOrbs extends GameObject{
 	
 	float a;
-	int r = 18;
+	int r = 12;
 	int life = 100;
 	private int orbCount = 1;
 	private int beforeOrbs;
@@ -28,7 +28,7 @@ public class MagicOrbs extends GameObject{
 		this.a = (360/orbCount) * beforeOrbs;
 	}
 
-	
+	@Override
 	public void tick() {
 		/*for(int i = 0; i < handler.object.size(); i ++){
 			if(handler.object.get(i).getId() == ID.Orb) orbCount ++;
@@ -38,32 +38,28 @@ public class MagicOrbs extends GameObject{
 		
 		if(!shoot){
 			a +=(float)0.05 * Game.delta;
-			x = (float) (circle.getX()+4 + r * Math.cos(a));
-			y = (float) (circle.getY()+4 + r * Math.sin(a));
+			x = (float) (circle.getX()+2 + r * Math.cos(a));
+			y = (float) (circle.getY()+2 + r * Math.sin(a));
 		}
 		else if(life == 0) handler.removeObject(this);
 		else life--;
 		
-		handler.addObject(new Trail(x,y,ID.Trail,Color.blue,8,8,0.15f,handler,"Circ"));
+		if(shoot)handler.addObject(new Trail(x,y,ID.Trail,Color.blue,8,8,0.15f,handler,"Circ"));
 		
 		x+=velX;
 		y+=velY;
 		collision();
 	}
-	
 	public void collision(){
-		for(Collision tempObject : handler.collision){
-			if(tempObject.getBounds().intersects(getBounds()) && shoot) handler.removeObject(this);
-		}
-		
+		handler.collision.forEach(tempObject->{if(tempObject.getBounds().intersects(getBounds()) && shoot) handler.removeObject(this);});
 	}
-	
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.blue);
 		g.fillOval((int)x, (int)y, 8, 8);
 		
 	}
-
+        @Override
 	public Rectangle getBounds() {
 		return new Rectangle((int)x,(int)y,8,8);
 	}

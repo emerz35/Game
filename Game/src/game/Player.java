@@ -25,7 +25,7 @@ public class Player extends GameObject{
 		this.MaxOrbs = 3;
 	}
 
-
+        @Override
 	public void tick() {
 				
 		x+= xisFree(velX);
@@ -55,9 +55,7 @@ public class Player extends GameObject{
 	public void damage(){
 		
 	}
-	
 	public float xisFree(float velX){
-		
 		if(velX == 0) return 0;
 		Rectangle collision = new Rectangle((int) (x + velX),(int)y ,width,height);
 		for(Collision tempObject : handler.collision){
@@ -78,18 +76,15 @@ public class Player extends GameObject{
 		}
 		return velY;
 	}
-
 	public float slow(float vel, float deceleration){
 		return vel > 0 ? vel - deceleration : vel + deceleration;
 	}
+        @Override
 	public void render(Graphics g) {
 		g.setColor(color);
-		g.fillRect((int)x, (int)y, width, height);
-		
-		
+		g.fillRect((int)x, (int)y, width, height);	
 	}
-
-	
+	@Override
 	public Rectangle getBounds() {
 		return new Rectangle((int)x,(int)y, width, height);
 	}
